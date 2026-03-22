@@ -1,22 +1,55 @@
-AZX Signal
-Enterprise GTM intelligence, grounded in live data.
-Most prospect research is manual, slow, and wrong by the time it reaches a strategist. AZX Signal replaces that process with a real-time intelligence pipeline — scraping live public signals about any target company, reasoning over what they actually reveal, and returning a transformation brief that a senior operator could walk into a board meeting with.
-What it produces
-Given a company name and vertical, the system surfaces:
+# GTM Signal - azx-signal
 
-The hidden operational failure — the structural breakdown that public statements don't name but hiring patterns and press releases reveal
-Why AI stalls there — the incentive misalignment or decision authority gap that kills transformation initiatives before they scale
-The coordination gap — the exact handoff point where information degrades and invisible cost accumulates
-The opening question — one sentence that reframes how leadership sees their own operations
+![Next.js](https://img.shields.io/badge/Next.js_14-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![Firecrawl](https://img.shields.io/badge/Firecrawl-orange?style=flat-square)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-black?style=flat-square&logo=vercel)
 
-Architecture
-The pipeline runs four Firecrawl scrapes in parallel — recent news, hiring signals, press releases, and company structure — then feeds the extracted context into a reasoning layer that produces grounded, company-specific analysis. Results stream to the interface in real time as they are generated.
-This is not a prompt wrapper. The output is grounded in what the company has actually said and done publicly in the last 90 days.
-Stack
+**Live demo:** https://azx-signal.vercel.app
 
-Next.js 14 — App Router, server-side streaming
-Firecrawl — parallel web scraping and signal extraction
-OpenAI gpt-4o-mini — reasoning over real scraped context
-Framer Motion — streaming UI with live scan sequence
-TypeScript — end to end
-Vercel — deployment with 60s function timeout for pipeline execution
+---
+
+Most prospect research is manual, stale, and generic by the time it reaches a strategist. GTM Signal replaces that process with a real-time intelligence pipeline — scraping live public signals about any target company and returning a grounded transformation brief that a senior operator could walk into a board meeting with.
+
+---
+
+## What it produces
+
+| Output | Description |
+|--------|-------------|
+| **Hidden Failure** | The structural breakdown public statements don't name but signals reveal |
+| **Why AI Stalls** | The incentive misalignment that kills transformation before it scales |
+| **Coordination Gap** | The exact handoff where information degrades and cost accumulates |
+| **Opening Question** | One sentence that reframes how leadership sees their own operations |
+
+---
+
+## Architecture
+```
+Company + Vertical
+        ↓
+Firecrawl — 4 parallel scrapes
+  ├── Recent news signals
+  ├── Hiring pattern signals
+  ├── Press release signals
+  └── Company structure signals
+        ↓
+OpenAI gpt-4o-mini — grounded reasoning over real data
+        ↓
+Server-sent events — streams to UI in real time
+        ↓
+4-screen intelligence brief
+```
+
+The output is different every time because it pulls from what the company actually said and did publicly. Not a prompt wrapper. A pipeline.
+
+---
+
+## Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 14, App Router, TypeScript |
+| Scraping | Firecrawl — parallel web intelligence |
+
