@@ -1,43 +1,22 @@
-# AZX Signal — Transformation Intelligence
+AZX Signal
+Enterprise GTM intelligence, grounded in live data.
+Most prospect research is manual, slow, and wrong by the time it reaches a strategist. AZX Signal replaces that process with a real-time intelligence pipeline — scraping live public signals about any target company, reasoning over what they actually reveal, and returning a transformation brief that a senior operator could walk into a board meeting with.
+What it produces
+Given a company name and vertical, the system surfaces:
 
-AZX Signal is a public-facing interactive marketing experience for AZX, an AI transformation consultancy working with enterprises in energy, utilities, logistics, and real estate. Enter a company name and sector, and the platform generates a transformation intelligence brief — surfacing the operational failures, organizational blockers, and coordination gaps that AZX identifies before walking into any engagement. The experience unfolds across four full-viewport screens, ending with the single question AZX uses to open the room.
+The hidden operational failure — the structural breakdown that public statements don't name but hiring patterns and press releases reveal
+Why AI stalls there — the incentive misalignment or decision authority gap that kills transformation initiatives before they scale
+The coordination gap — the exact handoff point where information degrades and invisible cost accumulates
+The opening question — one sentence that reframes how leadership sees their own operations
 
-## Setup
+Architecture
+The pipeline runs four Firecrawl scrapes in parallel — recent news, hiring signals, press releases, and company structure — then feeds the extracted context into a reasoning layer that produces grounded, company-specific analysis. Results stream to the interface in real time as they are generated.
+This is not a prompt wrapper. The output is grounded in what the company has actually said and done publicly in the last 90 days.
+Stack
 
-```bash
-npm install
-```
-
-Create a `.env.local` file in the project root:
-
-```
-OPENAI_API_KEY=your_openai_api_key_here
-```
-
-## Run
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-## Deploy
-
-```bash
-vercel deploy
-```
-
-Add `OPENAI_API_KEY` as an environment variable in your Vercel project settings before deploying.
-
-## Tech Stack
-
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- OpenAI gpt-4o-mini
-
----
-
-Built as AZX GTM Engineer application by Harshit Shukla
+Next.js 14 — App Router, server-side streaming
+Firecrawl — parallel web scraping and signal extraction
+OpenAI gpt-4o-mini — reasoning over real scraped context
+Framer Motion — streaming UI with live scan sequence
+TypeScript — end to end
+Vercel — deployment with 60s function timeout for pipeline execution
